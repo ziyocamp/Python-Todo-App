@@ -13,28 +13,69 @@ def add_task(todos: list[list[str, bool]]) -> None:
 
 
 def show_tasks(todos: list[list[str, bool]]) -> None:
-    table = Table(title="Todos")
+    if todos:
+        table = Table(title="Todos")
 
-    table.add_column("Number")
-    table.add_column("Name")
-    table.add_column("Status")
+        table.add_column("Number")
+        table.add_column("Name")
+        table.add_column("Status")
 
-    for index, todo in enumerate(todos, start=1):
-        status = "Bajarilmagan"
-        if todo[1]:
-            status = "Bajarilgan"
-        
-        table.add_row(str(index), todo[0], status)
+        for index, todo in enumerate(todos, start=1):
+            status = "Bajarilmagan"
+            if todo[1]:
+                status = "Bajarilgan"
+            
+            table.add_row(str(index), todo[0], status)
 
-    console.print(table)
+        console.print(table)
+    else:
+        print("Task mavjud emas")
 
 
 def delete_task(todos: list[list[str, bool]]) -> None:
-    pass
+    if todos:
+        show_tasks(todos)
+
+        index = int(input("Qaysi taskni o'chiqmoqchisiz? ")) - 1
+
+        if index < len(todos) and index >= 0:
+            todos.pop(index)
+            print("task o'chirildi")
+        else:
+            print("task nomeri xato kiritildi")
+    else:
+        print("Task mavjud emas")
 
 
 def update_task(todos: list[list[str, bool]]) -> None:
-    pass
+    if todos:
+        show_tasks(todos)
+
+        index = int(input("Qaysi taskni o'zgartirmoqchisiz? ")) - 1
+
+        if index < len(todos) and index >= 0:
+            task_name = input('Task Name: ').strip().capitalize()
+            todos[index][0] = task_name
+            print("task o'zgartirildi")
+        else:
+            print("task nomeri xato kiritildi")
+    else:
+        print("Task mavjud emas")
+
+
+def change_status(todos: list[list[str, bool]]) -> None:
+    if todos:
+        show_tasks(todos)
+
+        index = int(input("Qaysi taskni holatini o'zgartirmoqchisiz? ")) - 1
+
+        if index < len(todos) and index >= 0:
+            todos[index][1] = not todos[index][1]
+            print("task o'zgartirildi")
+        else:
+            print("task nomeri xato kiritildi")
+    else:
+        print("Task mavjud emas")
 
 
 def main():
@@ -49,6 +90,7 @@ def main():
         print('2. show task')
         print('3. delete task')
         print('4. update task')
+        print('5. change task status')
         print('0. exit')
 
         choice = input("> ")
@@ -60,6 +102,8 @@ def main():
             delete_task(todos)
         elif choice == '4':
             update_task(todos)
+        elif choice == '5':
+            change_status(todos)
         elif choice == '0':
             sys.exit()
         else:
