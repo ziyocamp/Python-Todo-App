@@ -14,15 +14,17 @@ def add_task(todos: list[list[str, bool]]) -> None:
 
 def show_tasks(todos: list[list[str, bool]]) -> None:
     table = Table(title="Todos")
+
     table.add_column("Number")
     table.add_column("Name")
     table.add_column("Status")
 
     for index, todo in enumerate(todos, start=1):
+        status = "Bajarilmagan"
         if todo[1]:
-            table.add_row(str(index), todo[0], "Bajarilgan")
-        else:
-            table.add_row(str(index), todo[0], "Bajarilmagan")
+            status = "Bajarilgan"
+        
+        table.add_row(str(index), todo[0], status)
 
     console.print(table)
 
