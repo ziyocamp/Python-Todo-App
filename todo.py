@@ -79,10 +79,7 @@ def change_status(todos: list[list[str, bool]]) -> None:
 
 
 def main():
-    todos: list[list[str, bool]] = [
-        ["Yugirish", False],
-        ["Kitob oqish", True]
-    ]
+    todos: list[list[str, bool]] = []
 
     while True:
         print('----menu----')
